@@ -1,6 +1,7 @@
 package com.matheusbarreto.workshopmongodb.services;
 
 import com.matheusbarreto.workshopmongodb.domain.User;
+import com.matheusbarreto.workshopmongodb.dto.UserDTO;
 import com.matheusbarreto.workshopmongodb.repository.UserRepository;
 import com.matheusbarreto.workshopmongodb.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class UserService {
     public User findById(String id) {
         Optional<User> user = repository.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!"));
+    }
+
+    public User insert(User user) {
+        return repository.insert(user);
+    }
+
+    public User fromDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 }
