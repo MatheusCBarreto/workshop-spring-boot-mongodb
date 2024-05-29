@@ -3,6 +3,7 @@ package com.matheusbarreto.workshopmongodb.config;
 import com.matheusbarreto.workshopmongodb.domain.Post;
 import com.matheusbarreto.workshopmongodb.domain.User;
 import com.matheusbarreto.workshopmongodb.dto.AuthorDTO;
+import com.matheusbarreto.workshopmongodb.dto.CommentDTO;
 import com.matheusbarreto.workshopmongodb.repository.PostRepository;
 import com.matheusbarreto.workshopmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,10 @@ public class Instantiation implements CommandLineRunner {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         Post post1 = new Post(null, sdf.parse("21/03/2018"), "partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+
+        post1.getCommentsDto().add(c1);
 
         postRepository.save(post1);
 
